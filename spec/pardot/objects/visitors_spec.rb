@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Pardot::Visitors do
+describe Pardot::Objects::Visitors do
   
   before do
     @client = create_client
