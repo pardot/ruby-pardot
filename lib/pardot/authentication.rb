@@ -10,5 +10,10 @@ module Pardot
       @api_key != nil
     end
     
+    def reauthenticate
+      @api_key = nil
+      authenticate
+    end
+    
   end
 end

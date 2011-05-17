@@ -1,25 +1,39 @@
 module Pardot
   module Http
     
-    def get object, path, params = {}
+    def get object, path, params = {}, num_retries = 0
       smooth_params object, params
-      path = fullpath object, path
-      check_response self.class.get path, :query => params
+      full_path = fullpath object, path
+      check_response self.class.get(full_path, :query => params)
+      
+    rescue Pardot::ExpiredApiKeyError => e
+      handle_expired_api_key :get, object, path, params, num_retries, e
       
     rescue SocketError, Interrupt, EOFError, SystemCallError => e
       raise Pardot::NetError.new(e)
     end
     
-    def post object, path, params = {}
+    def post object, path, params = {}, num_retries = 0
       smooth_params object, params
-      path = fullpath object, path
-      check_response self.class.post path, :query => params
+      full_path = fullpath object, path
+      check_response self.class.post(full_path, :query => params)
+      
+    rescue Pardot::ExpiredApiKeyError => e
+      handle_expired_api_key :post, object, path, params, num_retries, e
       
     rescue SocketError, Interrupt, EOFError, SystemCallError => e
       raise Pardot::NetError.new(e)
     end
     
     protected
+    
+    def handle_expired_api_key method, object, path, params, num_retries, e
+      raise e unless num_retries == 0
+      
+      reauthenticate
+      
+      send(method, object, path, params, 1)
+    end
     
     def smooth_params object, params
       return if object == "login"
@@ -31,13 +45,14 @@ module Pardot
     def check_response http_response
       rsp = http_response["rsp"]
       
-      if rsp && rsp["err"]
-        raise ResponseError.new rsp["err"]
+      error = rsp["err"] if rsp
+      error ||= "Unknown Failure: #{rsp.inspect}" if rsp && rsp["stat"] == "fail"
+      
+      if error == "Invalid API key or user key" && @api_key
+        raise ExpiredApiKeyError.new @api_key
       end
       
-      if rsp && rsp["stat"] == "fail"
-        raise ResponseError.new "Unknown Failure: #{rsp.inspect}"
-      end
+      raise ResponseError.new error if error
       
       rsp
     end
