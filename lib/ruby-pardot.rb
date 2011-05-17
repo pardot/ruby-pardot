@@ -8,6 +8,7 @@ require 'pardot/http'
 require 'pardot/error'
 require 'pardot/authentication'
 
+require 'pardot/objects/lists'
 require 'pardot/objects/opportunities'
 require 'pardot/objects/prospects'
 require 'pardot/objects/users'

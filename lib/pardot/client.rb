@@ -8,11 +8,12 @@ module Pardot
     
     include Authentication
     include Http
-    
-    include Objects::Prospects
+
+    include Objects::Lists
     include Objects::Opportunities
-    include Objects::Visitors
+    include Objects::Prospects
     include Objects::Users
+    include Objects::Visitors
     include Objects::Visits
     include Objects::VisitorActivities
     
