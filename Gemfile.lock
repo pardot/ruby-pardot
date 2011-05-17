@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-pardot (0.0.1)
+    ruby-pardot (1.0)
       crack
       httparty
 
