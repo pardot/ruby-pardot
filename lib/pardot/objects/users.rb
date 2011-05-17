@@ -22,7 +22,7 @@ module Pardot
           post "/do/read/email/#{email}", params
         end
         
-        def readby_id id, params = {}
+        def read_by_id id, params = {}
           post "/do/read/id/#{id}", params
         end
         
