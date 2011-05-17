@@ -9,6 +9,7 @@ module Pardot
     include Authentication
     include Http
     include Prospects
+    include Opportunities
     
     attr_accessor :email, :password, :user_key, :api_key, :format
     
