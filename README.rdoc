@@ -8,15 +8,34 @@ Add the following to your Gemfile
 
 === Authentication
 
+The client will authenticate before performing other API calls, but you can manually authenticate as well
+
   client = Pardot::Client.new email, password, user_key
   
   # will raise a Pardot::ResponseError if login fails
   # will raise a Pardot::NetError if the http call fails
   client.authenticate
   
-=== Accessing Prospects
+== Object Types
+
+The available objects are:
+
+* opportunities
+* prospects
+* users
+* visitor_activities
+* visitors
+* visits
+
+== See Pardot API for details
   
-  prospects = client.prospects.query(:assigned => false)
+=== How to query objects
+  
+http://developer.pardot.com/kb/api-version-3/querying-prospects
+  
+Most objects accept limit, offset, sort_by, and sord_order parameters
+
+  prospects = client.prospects.query(:assigned => false, :sort_by => "last_activity_at", :limit => 20)
   
   prospects["total_results"] # number of prospects found
   
@@ -24,8 +43,41 @@ Add the following to your Gemfile
     puts prospect["first_name"]
   end
 
+=== How to create and edit objects
+
+See each individual object's API reference page for available methods
+
+http://developer.pardot.com/kb/api-version-3/using-prospects
+
+  prospect = client.prospects.create("user@test.com", :first_name => "John", :last_name => "Doe")
+  
+  prospect.each do |key, value|
+    puts "#{key} is #{value}"
+  end
+  
 === Switching formats
   
   client.format = "simple" # default
   client.format = "mobile"
   client.format = "full"
+
+=== Error handling
+  
+Pardot will respond with an error message when you provide invalid parameters
+
+  begin
+    prospect = client.prospects.create("user@test.com")
+  rescue Pardot::ResponseError => e
+    # the request went through, but Pardot responded with an error, possibly because this email is already in use
+  end
+
+Performing API calls across the internet is inherently unsafe, so be sure to catch the exceptions
+  
+  begin
+    visitor = client.visitors.query(:id_greater_than => 200)
+  rescue Pardot::NetError => e
+    # the API request failed
+    #   - socket broke before the request was completed
+    #   - pi.pardot.com is under heavy load
+    #   - many number of other reasons
+  end
