@@ -10,6 +10,10 @@ module Pardot
     include Http
     include Prospects
     include Opportunities
+    include Visitors
+    include Users
+    include Visits
+    include VisitorActivities
     
     attr_accessor :email, :password, :user_key, :api_key, :format
     
