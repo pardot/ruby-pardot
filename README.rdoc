@@ -2,7 +2,7 @@
 
 Add the following to your Gemfile
 
-  gem "ruby-pardot", :git => "git://github.com/pardot/ruby-pardot.git"
+  gem "ruby-pardot"
 
 == Usage
 
