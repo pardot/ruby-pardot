@@ -16,7 +16,7 @@ The client will authenticate before performing other API calls, but you can manu
   # will raise a Pardot::NetError if the http call fails
   client.authenticate
   
-== Object Types
+=== Object Types
 
 The available objects are:
 
@@ -27,9 +27,7 @@ The available objects are:
 * visitors
 * visits
 
-== See Pardot API for details
-  
-=== How to query objects
+=== Querying Objects
   
 http://developer.pardot.com/kb/api-version-3/querying-prospects
   
@@ -43,7 +41,7 @@ Most objects accept limit, offset, sort_by, and sord_order parameters
     puts prospect["first_name"]
   end
 
-=== How to create and edit objects
+=== Creating, editing, and reading objects
 
 See each individual object's API reference page for available methods
 
@@ -55,7 +53,7 @@ http://developer.pardot.com/kb/api-version-3/using-prospects
     puts "#{key} is #{value}"
   end
   
-=== Switching formats
+=== Output formats
   
   client.format = "simple" # default
   client.format = "mobile"
