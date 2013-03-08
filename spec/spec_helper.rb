@@ -8,4 +8,4 @@ require 'httparty'
 
 require 'ruby-pardot'
 
-Dir[File.join("spec/support/**/*.rb")].each {|f| require f}
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

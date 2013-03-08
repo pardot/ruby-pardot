@@ -47,8 +47,9 @@ module Pardot
       
       error = rsp["err"] if rsp
       error ||= "Unknown Failure: #{rsp.inspect}" if rsp && rsp["stat"] == "fail"
+      content = error['__content__'] if error.is_a?(Hash)
       
-      if error == "Invalid API key or user key" && @api_key
+      if [error, content].include?("Invalid API key or user key") && @api_key
         raise ExpiredApiKeyError.new @api_key
       end
       
