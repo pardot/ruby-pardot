@@ -11,7 +11,7 @@ describe Pardot::Authentication do
     before do
       @client = create_client
       
-      fake_post "/api/login/version/3?email=user%40test.com&password=foo&user_key=bar",
+      fake_post "/api/login/version/3",
                 %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">\n   <api_key>my_api_key</api_key>\n</rsp>\n)
     end
     
