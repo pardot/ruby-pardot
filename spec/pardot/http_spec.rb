@@ -18,8 +18,10 @@ describe Pardot::Http do
     end
     
     it "should notice errors and raise them as Pardot::ResponseError" do
-      fake_get "/api/foo/version/3/bar?api_key=my_api_key&format=simple&user_key=bar",
-               %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
+      fake_get "/api/foo/version/3/bar?api_key=my_api_key&format=json&output=simple&user_key=bar",
+               { "err" => { "__content__" => "Login Failed", "code" => "15"},
+                 "stat" => "fail",
+                 "version"=>"1.0"}.to_json
       
       lambda { get }.should raise_error(Pardot::ResponseError)
     end
@@ -31,9 +33,11 @@ describe Pardot::Http do
     end
     
     it "should call handle_expired_api_key when the api key expires" do
-      fake_get "/api/foo/version/3/bar?api_key=my_api_key&format=simple&user_key=bar",
-               %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
-      
+      fake_get "/api/foo/version/3/bar?api_key=my_api_key&format=json&output=simple&user_key=bar",
+               { "err" => { "__content__" => "Invalid API key or user key", "code" => "15"},
+                 "stat" => "fail",
+                 "version"=>"1.0"}.to_json
+
       @client.should_receive(:handle_expired_api_key)
       get
     end
@@ -47,8 +51,10 @@ describe Pardot::Http do
     end
     
     it "should notice errors and raise them as Pardot::ResponseError" do
-      fake_post "/api/foo/version/3/bar?api_key=my_api_key&format=simple&user_key=bar",
-                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
+      fake_post "/api/foo/version/3/bar",
+                { "err" => { "__content__" => "Login Failed", "code" => "15"},
+                  "stat" => "fail",
+                  "version"=>"1.0"}.to_json
       
       lambda { post }.should raise_error(Pardot::ResponseError)
     end
@@ -60,8 +66,10 @@ describe Pardot::Http do
     end
     
     it "should call handle_expired_api_key when the api key expires" do
-      fake_post "/api/foo/version/3/bar?api_key=my_api_key&format=simple&user_key=bar",
-                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
+      fake_post "/api/foo/version/3/bar",
+                { "err" => { "__content__" => "Invalid API key or user key", "code" => "15"},
+                  "stat" => "fail",
+                  "version"=>"1.0"}.to_json
       
       @client.should_receive(:handle_expired_api_key)
       post

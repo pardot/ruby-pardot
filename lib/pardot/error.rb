@@ -6,14 +6,15 @@ module Pardot
   class ResponseError < Error
     def initialize(res)
       @res = res
+      @attributes = {}
     end
 
     def to_s
-      @res["__content__"]
+      @res['__content__']
     end
 
     def code
-      @res["code"].to_i
+      @res['code'].to_i
     end
 
     def inspect

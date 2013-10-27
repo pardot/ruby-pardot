@@ -4,8 +4,7 @@ module Pardot
     
     include HTTParty
     base_uri 'https://pi.pardot.com'
-    format :xml
-    
+
     include Authentication
     include Http
 
@@ -24,9 +23,9 @@ module Pardot
       @password = password
       @user_key = user_key
       
-      @format = "simple"
+      @output = 'simple'
+      @format = 'json'
     end
-    
-    
+
   end
 end
