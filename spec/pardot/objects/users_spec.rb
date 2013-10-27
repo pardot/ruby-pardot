@@ -1,64 +1,37 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Pardot::Objects::Users do
-  
-  before do
-    @client = create_client
+
+  let!(:client) { create_client }
+
+  describe 'query' do
+
+    let(:response) do
+      { 'total_results' => 2,
+        'user'          =>
+            [{ 'email' => 'user@test.com', 'first_name' => 'Jim' },
+             { 'email' => 'user@example.com', 'first_name' => 'Sue' }] }
+    end
+
+    it 'should take in some arguments' do
+      fake_get '/api/user/version/3/do/query?api_key=my_api_key&user_key=bar&id_greater_than=200&format=json&output=simple',
+               response.to_json
+
+      client.users.query(:id_greater_than => 200).should == response
+    end
+
   end
-  
-  describe "query" do
-    
-    def sample_results
-      %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
-        <result>
-          <total_results>2</total_results>
-          <user>
-            <email>user@test.com</email>
-            <first_name>Jim</first_name>
-          </user>
-          <user>
-            <email>user@example.com</email>
-            <first_name>Sue</first_name>
-          </user>
-        </result>
-      </rsp>)
+
+  describe 'read_by_email' do
+
+    let(:response) do
+      { 'user' => { 'email' => 'user@test.com', 'first_name' => 'Jim' } }
     end
-    
-    before do
-      @client = create_client
+
+    it 'should return the prospect' do
+      fake_post '/api/user/version/3/do/read/email/user@test.com', response.to_json
+
+      client.users.read_by_email('user@test.com').should == response['user']
     end
-    
-    it "should take in some arguments" do
-      fake_get "/api/user/version/3/do/query?api_key=my_api_key&user_key=bar&id_greater_than=200&format=simple", sample_results
-      
-      @client.users.query(:id_greater_than => 200).should == {"total_results" => 2, 
-        "user"=>[
-          {"email"=>"user@test.com", "first_name"=>"Jim"}, 
-          {"email"=>"user@example.com", "first_name"=>"Sue"}
-        ]}
-    end
-    
   end
-  
-  describe "read_by_email" do
-    
-    def sample_results
-      %(<?xml version="1.0" encoding="UTF-8"?>
-      <rsp stat="ok" version="1.0">
-        <user>
-          <email>user@example.com</email>
-          <first_name>Sue</first_name>
-        </user>
-      </rsp>)
-    end
-    
-    it "should return the prospect" do
-      fake_post "/api/user/version/3/do/read/email/user@test.com?api_key=my_api_key&user_key=bar&format=simple", sample_results
-      
-      @client.users.read_by_email("user@test.com").should == {"email"=>"user@example.com", "first_name"=>"Sue"}
-      
-    end
-    
-  end
-  
 end
