@@ -7,6 +7,7 @@ require 'pardot/error'
 require 'pardot/authentication'
 
 require 'pardot/objects/base_object'
+require 'pardot/objects/emails'
 require 'pardot/objects/lists'
 require 'pardot/objects/opportunities'
 require 'pardot/objects/prospects'
