@@ -54,6 +54,15 @@ http://developer.pardot.com/kb/api-version-3/using-prospects
     puts "#{key} is #{value}"
   end
   
+=== Emails
+
+See each individual call's [API reference page](http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents).
+
+  # Sample usage
+  @pardot.emails.read_by_id(email_id)
+  @pardot.emails.send_to_list(:email_template_id => template_id, 'list_ids[]' => list_id, :campaign_id => campaign_id)
+  @pardot.emails.send_to_prospect(prospect_id, :campaign_id => campaign_id, :email_template_id => template_id)
+  
 === Output formats
   
   client.format = "simple" # default
