@@ -14,6 +14,7 @@ module Pardot
     include Objects::ListMemberships
     include Objects::Opportunities
     include Objects::Prospects
+    include Objects::ProspectAccounts
     include Objects::Users
     include Objects::Visitors
     include Objects::Visits
