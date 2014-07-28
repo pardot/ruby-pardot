@@ -9,7 +9,7 @@ module Pardot
     rescue Pardot::ExpiredApiKeyError => e
       handle_expired_api_key :get, object, path, params, num_retries, e
       
-    rescue SocketError, Interrupt, EOFError, SystemCallError => e
+    rescue SocketError, Interrupt, EOFError, SystemCallError, Timeout::Error, MultiXml::ParseError => e
       raise Pardot::NetError.new(e)
     end
     
@@ -21,7 +21,7 @@ module Pardot
     rescue Pardot::ExpiredApiKeyError => e
       handle_expired_api_key :post, object, path, params, num_retries, e
       
-    rescue SocketError, Interrupt, EOFError, SystemCallError => e
+    rescue SocketError, Interrupt, EOFError, SystemCallError, Timeout::Error, MultiXml::ParseError => e
       raise Pardot::NetError.new(e)
     end
     
