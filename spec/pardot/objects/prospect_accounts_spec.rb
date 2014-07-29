@@ -23,7 +23,7 @@ describe Pardot::Objects::ProspectAccounts do
       </rsp>)
     end
 
-    it "should take in some arguments" do
+    it "should take in some arguments and respond with valid items" do
       fake_get "/api/prospectAccount/version/3/do/query?assigned=true&format=simple&user_key=bar&api_key=my_api_key", sample_results
 
       @client.prospect_accounts.query(:assigned => true).should == {'total_results' => 2,
@@ -66,7 +66,7 @@ describe Pardot::Objects::ProspectAccounts do
       </rsp>)
     end
 
-    it 'should return the prospect' do
+    it 'should return the prospect account' do
       fake_post '/api/prospectAccount/version/3/do/create?api_key=my_api_key&user_key=bar&format=simple&name=SuperPanda', sample_results
 
       @client.prospect_accounts.create(:name => 'SuperPanda').should == {"name"=>"SuperPanda"}
