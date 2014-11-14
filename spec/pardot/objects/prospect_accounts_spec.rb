@@ -54,7 +54,6 @@ describe Pardot::Objects::ProspectAccounts do
 
   end
 
-
   describe 'create' do
 
     def sample_results
@@ -73,6 +72,28 @@ describe Pardot::Objects::ProspectAccounts do
 
     end
 
+  end
+
+  describe 'assign' do
+    def sample_results
+      %(<?xml version="1.0" encoding="UTF-8"?>
+      <rsp stat="ok" version="1.0">
+        <prospectAccount>
+          <id>1234</id>
+          <name>SuperPanda</name>
+          <assigned_to>
+            <user_id>4321</user_id>
+            <user_email>pandaklaus@northpole.np</user_email>
+          </assigned_to>
+        </prospectAccount>
+      </rsp>)
+    end
+
+    it 'should return the prospect account with the assigned_to tag' do
+      fake_post '/api/prospectAccount/version/3/do/assign/id/1234?api_key=my_api_key&user_key=bar&format=simple&user_id=4321', sample_results
+
+      @client.prospect_accounts.assign('1234', {:user_id => '4321'}).should == {'id' => '1234', 'name' => 'SuperPanda', 'assigned_to' => { 'user_id' => '4321', 'user_email' => 'pandaklaus@northpole.np' }}
+    end
   end
 
 end

@@ -28,7 +28,8 @@ module Pardot
 
         # read_by_id
         # update_by_id
-        [:read, :update].each do |verb|
+        # assign_by_id
+        [:read, :update, :assign].each do |verb|
           define_method(verb) do |id, params={}|
             post(api_url(verb, 'id', id), params)
           end
