@@ -26,9 +26,7 @@ module Pardot
           post('/do/create', params)
         end
 
-        # read_by_id
-        # update_by_id
-        # assign_by_id
+        # read, update, assign (all are by id)
         [:read, :update, :assign].each do |verb|
           define_method(verb) do |id, params={}|
             post(api_url(verb, 'id', id), params)
