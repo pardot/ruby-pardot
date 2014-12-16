@@ -2,7 +2,8 @@ module Pardot
   module Objects
     module ProspectAccounts
       def prospect_accounts
-        @prospect_accounts ||= ProspectAccounts.new self
+        @prospect_accounts ||=
+          ::Pardot::Objects::ProspectAccounts::ProspectAccounts.new(self)
       end
 
       class ProspectAccounts
@@ -26,11 +27,18 @@ module Pardot
           post('/do/create', params)
         end
 
-        # read, update, assign (all are by id)
-        [:read, :update, :assign].each do |verb|
-          define_method(verb) do |id, params={}|
-            post(api_url(verb, 'id', id), params)
-          end
+        def read(id, params={})
+          post(api_url('read', 'id', id), params)
+        end
+
+        def update(id, params={})
+          post(api_url('update', 'id', id), params)
+        end
+
+        # params must include either `user_email`,
+        # `user_id`, or `group_id`
+        def assign(id, params={})
+          post(api_url('assign', 'id', id), params)
         end
 
         private
