@@ -3,7 +3,7 @@ module Pardot
     
     def authenticate
       resp = post "login", nil, :email => @email, :password => @password, :user_key => @user_key
-      @api_key = resp["api_key"]
+      @api_key = resp && resp["api_key"]
     end
     
     def authenticated?
