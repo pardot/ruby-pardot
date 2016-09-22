@@ -72,7 +72,7 @@ describe Pardot::Http do
   describe "getV4" do
     
     def get object = "foo", path = "/bar", params = {}
-      @client.set_version "4"
+      @client.version = "4"
       @client.get object, path, params
     end
     
@@ -102,7 +102,7 @@ describe Pardot::Http do
   describe "postV4" do
     
     def post object = "foo", path = "/bar", params = {}
-      @client.set_version "4"
+      @client.version = "4"
       @client.post object, path, params
     end
     

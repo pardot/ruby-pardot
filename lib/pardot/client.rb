@@ -31,9 +31,5 @@ module Pardot
       @format = "simple"
     end
 
-    def set_version version
-      @version = version
-    end
-
   end
 end
