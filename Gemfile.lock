@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-pardot (1.0.2)
+    ruby-pardot (1.1.0)
       crack
       httparty
 
@@ -15,7 +15,7 @@ GEM
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    json (1.8.1)
+    json (1.8.3)
     multi_xml (0.5.5)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
@@ -25,13 +25,16 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
-    safe_yaml (1.0.3)
+    safe_yaml (1.0.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (>= 1.0.0)
+  bundler (>= 1.10)
   fakeweb
   rspec
   ruby-pardot!
+
+BUNDLED WITH
+   1.11.2

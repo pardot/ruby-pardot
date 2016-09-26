@@ -58,8 +58,8 @@ module Pardot
       rsp
     end
     
-    def fullpath object, path, version = 3
-      full = File.join("/api", object, "version", version.to_s)
+    def fullpath object, path
+      full = File.join("/api", object, "version", @version.to_s)
       unless path.nil?
         full = File.join(full, path)
       end
