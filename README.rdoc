@@ -31,7 +31,7 @@ The available objects are:
 
 === Querying Objects
   
-http://developer.pardot.com/kb/api-version-3/querying-prospects
+http://developer.pardot.com/kb/api-version-3/prospects/#querying-prospects
   
 Most objects accept limit, offset, sort_by, and sord_order parameters
 
@@ -47,7 +47,7 @@ Most objects accept limit, offset, sort_by, and sord_order parameters
 
 See each individual object's API reference page for available methods
 
-http://developer.pardot.com/kb/api-version-3/using-prospects
+http://developer.pardot.com/kb/api-version-3/prospects/#using-prospects
 
   prospect = client.prospects.create("user@test.com", :first_name => "John", :last_name => "Doe")
   
@@ -57,7 +57,7 @@ http://developer.pardot.com/kb/api-version-3/using-prospects
   
 === Emails
 
-See each individual call's {API reference page}[http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents].
+See each individual call's {API reference page}[http://developer.pardot.com/kb/api-version-3/emails/].
 
   # Sample usage
   @pardot.emails.read_by_id(email_id)
