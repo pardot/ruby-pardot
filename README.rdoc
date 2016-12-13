@@ -57,7 +57,7 @@ http://developer.pardot.com/kb/api-version-3/using-prospects
   
 === Emails
 
-See each individual call's [API reference page](http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents).
+See each individual call's {API reference page}[http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents].
 
   # Sample usage
   @pardot.emails.read_by_id(email_id)
