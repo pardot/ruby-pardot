@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - "1.9.3"
+  - "1.9.2"
+  - "2.1.0"
+  - "ruby-head"
+notifications:
+    irc: "irc.freenode.org#generator-travis-ci"
+before_script:
+    # install dependencies
+    - bundle install
+script:
+    # We want to gate on passing tests and a successful build
+    - bundle exec rspec
