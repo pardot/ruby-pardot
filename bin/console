@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'ruby-pardot'
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require 'pry'
+# Pry.start
+
+creds_file = File.expand_path('../../.creds.rb', __FILE__)
+if File.exists?(creds_file)
+  load creds_file
+else
+  puts <<-MSG
+You can store your creds in <pardot root>/.creds.rb. Format:
+ENV['email'] ||= 'dummy@example.com'
+ENV['password'] ||= 'secret'
+ENV['user_key'] ||= '72983428374238798787abh'
+
+  MSG
+end
+
+$client = Pardot::Client.new(
+  ENV['email'],
+  ENV['password'],
+  ENV['user_key'],
+  ENV.fetch('version', 4)
+)
+
+puts "You have $client: #{$client.inspect}"
+puts <<-MSG
+Some example queries:
+$client.prospects.query({})
+$client.prospects.batch_upsert(
+  [
+    { email: 'foo@example.com', first_name: "John\#{Time.now.to_s}", last_name: 'B. Gem' }
+  ]
+)
+MSG
+
+require "irb"
+IRB.start

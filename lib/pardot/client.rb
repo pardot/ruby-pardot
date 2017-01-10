@@ -6,6 +6,8 @@ module Pardot
     base_uri 'https://pi.pardot.com'
     format :xml
 
+    debug_output $stdout if ENV['DEBUG_PARDOT']
+
     include Authentication
     include Http
 
