@@ -89,6 +89,18 @@ module Pardot
         def upsert_by_fid fid, params = {}
           post "/do/upsert/fid/#{fid}", params
         end
+
+        def batch_create(prospects = [])
+          post '/do/batchCreate', :prospects => { prospects: prospects }.to_json
+        end
+
+        def batch_update(prospects = [])
+          post '/do/batchUpdate', :prospects => { prospects: prospects }.to_json
+        end
+
+        def batch_upsert(prospects = [])
+          post '/do/batchUpsert', :prospects => { prospects: prospects }.to_json
+        end
         
         protected
         
