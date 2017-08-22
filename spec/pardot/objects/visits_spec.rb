@@ -53,7 +53,8 @@ describe Pardot::Objects::Visits do
     end
     
     it "should return the prospect" do
-      fake_post "/api/visit/version/3/do/read/id/10?user_key=bar&api_key=my_api_key&format=simple", sample_results
+      fake_post "/api/visit/version/3/do/read/id/10", :query, 
+        {:user_key => "bar", :api_key => "my_api_key", :format => "simple"}, sample_results
       
       @client.visits.read(10).should == {"visitor_page_view_count"=>"1", "duration_in_seconds"=>"10"}
       

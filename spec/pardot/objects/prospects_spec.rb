@@ -50,7 +50,8 @@ describe Pardot::Objects::Prospects do
     end
     
     it "should return the prospect" do
-      fake_post "/api/prospect/version/3/do/create/email/user@test.com?api_key=my_api_key&user_key=bar&format=simple&first_name=Jim", sample_results
+      fake_post "/api/prospect/version/3/do/create/email/user@test.com", :query,
+        {:api_key => "my_api_key", :user_key => "bar", :format => "simple", :first_name => "Jim"}, sample_results
       
       @client.prospects.create("user@test.com", :first_name => "Jim").should == {"last_name"=>"Smith", "first_name"=>"Jim"}
       

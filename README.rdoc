@@ -64,6 +64,13 @@ See each individual call's [API reference page](http://developer.pardot.com/kb/a
   @pardot.emails.send_to_list(:email_template_id => template_id, 'list_ids[]' => list_id, :campaign_id => campaign_id)
   @pardot.emails.send_to_prospect(prospect_id, :campaign_id => campaign_id, :email_template_id => template_id)
   
+=== Handling large parameters
+
+Parameters can optionally be sent as the form body.  Send the parameter `:params_as_body` with a value of true to send the parameters in the form body.  Useful for sending emails already formatted as HTML.
+
+  # Sample usage
+  @pardot.emails.send_to_prospect(prospect_id, :params_as_body => true, :campaign_id => campaign_id, :name => name, :from_name => from_name, :from_email => from_email, :subject => subject, :html_content => html, :text_content => text)
+
 === Output formats
   
   client.format = "simple" # default

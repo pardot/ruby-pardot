@@ -53,7 +53,9 @@ describe Pardot::Objects::Visitors do
     end
     
     it "should return the prospect" do
-      fake_post "/api/visitor/version/3/do/assign/id/10?type=Good&api_key=my_api_key&user_key=bar&format=simple&name=Jim", sample_results
+      fake_post "/api/visitor/version/3/do/assign/id/10", :query,
+        {:type => "Good", :api_key => "my_api_key", :user_key => "bar", :format => "simple", :name => "Jim"}, 
+        sample_results
       
       @client.visitors.assign(10, :name => "Jim", :type => "Good").should == {"browser"=>"Chrome", "language"=>"es"}
       
