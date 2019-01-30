@@ -13,10 +13,10 @@ module Pardot
       raise Pardot::NetError.new(e)
     end
     
-    def post object, path, params = {}, num_retries = 0
+    def post object, path, params = {}, num_retries = 0, bodyParams = {}
       smooth_params object, params
       full_path = fullpath object, path
-      check_response self.class.post(full_path, :query => params)
+      check_response self.class.post(full_path, :query => params, :body => bodyParams)
       
     rescue Pardot::ExpiredApiKeyError => e
       handle_expired_api_key :post, object, path, params, num_retries, e

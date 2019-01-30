@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "ruby-pardot"
 
-  s.add_dependency "crack"
-  s.add_dependency "httparty"
+  s.add_dependency "crack", "0.4.3"
+  s.add_dependency "httparty", "0.13.1"
 
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "rspec"
