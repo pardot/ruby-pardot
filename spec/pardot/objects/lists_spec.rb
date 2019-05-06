@@ -27,13 +27,14 @@ describe Pardot::Objects::Lists do
     end
     
     it "should take in some arguments" do
-      fake_get "/api/list/version/3/do/query?api_key=my_api_key&id_greater_than=200&format=simple&user_key=bar", sample_results
+      fake_get "/api/list/version/3/do/query?id_greater_than=200&format=simple", sample_results
       
       @client.lists.query(:id_greater_than => 200).should == {"total_results" => 2, 
         "list"=>[
           {"name"=>"Asdf List"}, 
           {"name"=>"Qwerty List"}
         ]}
+      assert_authorization_header
     end
     
   end
