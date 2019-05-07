@@ -29,13 +29,14 @@ describe Pardot::Objects::Visitors do
     end
     
     it "should take in some arguments" do
-      fake_get "/api/visitor/version/3/do/query?api_key=my_api_key&user_key=bar&id_greater_than=200&format=simple", sample_results
+      fake_get "/api/visitor/version/3/do/query?id_greater_than=200&format=simple", sample_results
       
       @client.visitors.query(:id_greater_than => 200).should == {"total_results" => 2, 
         "visitor"=>[
           {"browser"=>"Firefox", "language"=>"en"}, 
           {"browser"=>"Chrome", "language"=>"es"}
         ]}
+      assert_authorization_header
     end
     
   end
@@ -53,10 +54,10 @@ describe Pardot::Objects::Visitors do
     end
     
     it "should return the prospect" do
-      fake_post "/api/visitor/version/3/do/assign/id/10?type=Good&api_key=my_api_key&user_key=bar&format=simple&name=Jim", sample_results
+      fake_post "/api/visitor/version/3/do/assign/id/10?type=Good&format=simple&name=Jim", sample_results
       
       @client.visitors.assign(10, :name => "Jim", :type => "Good").should == {"browser"=>"Chrome", "language"=>"es"}
-      
+      assert_authorization_header
     end
     
   end

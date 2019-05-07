@@ -12,3 +12,7 @@ end
 def fake_authenticate client, api_key
   client.api_key = api_key
 end
+
+def assert_authorization_header
+  expect(FakeWeb.last_request[:authorization]).to eq('Pardot api_key=my_api_key, user_key=bar')
+end

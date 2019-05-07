@@ -26,13 +26,14 @@ describe Pardot::Objects::Prospects do
     end
     
     it "should take in some arguments" do
-      fake_get "/api/prospect/version/3/do/query?assigned=true&format=simple&user_key=bar&api_key=my_api_key", sample_results
+      fake_get "/api/prospect/version/3/do/query?assigned=true&format=simple", sample_results
       
       @client.prospects.query(:assigned => true).should == {"total_results" => 2, 
         "prospect"=>[
           {"last_name"=>"Smith", "first_name"=>"Jim"}, 
           {"last_name"=>"Green", "first_name"=>"Sue"}
         ]}
+      assert_authorization_header
     end
     
   end
@@ -50,10 +51,10 @@ describe Pardot::Objects::Prospects do
     end
     
     it "should return the prospect" do
-      fake_post "/api/prospect/version/3/do/create/email/user@test.com?api_key=my_api_key&user_key=bar&format=simple&first_name=Jim", sample_results
+      fake_post "/api/prospect/version/3/do/create/email/user@test.com?format=simple&first_name=Jim", sample_results
       
       @client.prospects.create("user@test.com", :first_name => "Jim").should == {"last_name"=>"Smith", "first_name"=>"Jim"}
-      
+      assert_authorization_header
     end
     
   end
