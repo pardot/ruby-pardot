@@ -1,5 +1,3 @@
-# Modified to create a new list membership as "create" under the MIT license.
-
 module Pardot
   module Objects
     module ListMemberships
