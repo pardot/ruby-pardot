@@ -9,6 +9,7 @@ module Pardot
     include Authentication
     include Http
 
+    include Objects::CustomFields
     include Objects::Emails
     include Objects::Lists
     include Objects::ListMemberships
