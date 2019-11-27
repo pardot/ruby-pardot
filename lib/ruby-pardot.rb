@@ -6,6 +6,8 @@ require 'pardot/http'
 require 'pardot/error'
 require 'pardot/authentication'
 
+require 'pardot/objects/accounts'
+require 'pardot/objects/campaigns'
 require 'pardot/objects/emails'
 require 'pardot/objects/lists'
 require 'pardot/objects/list_memberships'
