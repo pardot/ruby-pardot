@@ -20,6 +20,7 @@ The client will authenticate before performing other API calls, but you can manu
 
 The available objects are:
 
+* custom_fields 
 * emails
 * lists
 * opportunities
