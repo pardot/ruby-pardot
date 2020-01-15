@@ -6,7 +6,7 @@ PATH
       httparty (= 0.13.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -17,6 +17,7 @@ GEM
       multi_xml (>= 0.5.2)
     json (1.8.6)
     multi_xml (0.6.0)
+    rake (13.0.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -38,6 +39,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (>= 1.10)
   fakeweb
+  rake
   rspec
   ruby-pardot!
 

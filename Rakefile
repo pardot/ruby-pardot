@@ -1,11 +1,11 @@
-require 'bundler'
-Bundler::GemHelper.install_tasks
+require 'bundler/gem_tasks'
 
+begin
+  require 'rspec/core/rake_task'
 
-require 'rspec/core'
-require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
 
-desc "Run all specs"
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = "./spec/**/*_spec.rb"
+  task default: :spec
+rescue LoadError
+  # Ignore outside test envrionment.
 end
