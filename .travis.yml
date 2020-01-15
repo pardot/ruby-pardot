@@ -4,3 +4,8 @@ rvm:
   - 2.5
   - 2.6
   - 2.7
+
+# Build gem and show its contents
+after_success:
+  - bundle exec rake build
+  - cd pkg && tar xf *.gem && tar tvf data.tar.gz
