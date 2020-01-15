@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakeweb"
 
-  s.files        = `git ls-files -z`.split("\x0")
+  s.files        = `git ls-files -z`.split("\x0").grep(%r{lib|README\.rdoc})
   s.require_path = 'lib'
 end
