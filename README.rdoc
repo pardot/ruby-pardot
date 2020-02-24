@@ -58,13 +58,15 @@ http://developer.pardot.com/kb/api-version-3/using-prospects
 
 === Subscribing email addresses to lists
 
-Subscriptions to lists are managed through the Prospect object. [To add an email to a list, you can do it in an update on the Prospect object by passing the list_id as a query param](http://developer.pardot.com/kb/api-version-4/prospects/#updating-email-list-subscriptions) as follows:
+Subscriptions to lists are managed through the Prospect object. To add an email to a list, you can do it in an update on the Prospect object by passing the list_id as a query param as follows:
 
   #Sample usage
   email = 'your@email.address'
   list_id = '20303'
   params = { "list_#{list_id}": 1 }
   client.prospects.upsert_by_email(email, params)
+
+See http://developer.pardot.com/kb/api-version-4/prospects/#updating-email-list-subscriptions
 
 === Emails
 
