@@ -11,16 +11,16 @@ Add the following to your Gemfile
 The client will authenticate before performing other API calls, but you can manually authenticate as well
 
   client = Pardot::Client.new email, password, user_key
-  
+
   # will raise a Pardot::ResponseError if login fails
   # will raise a Pardot::NetError if the http call fails
   client.authenticate
-  
+
 === Object Types
 
 The available objects are:
 
-* custom_fields 
+* custom_fields
 * emails
 * lists
 * opportunities
@@ -31,15 +31,15 @@ The available objects are:
 * visits
 
 === Querying Objects
-  
+
 http://developer.pardot.com/kb/api-version-3/querying-prospects
-  
+
 Most objects accept limit, offset, sort_by, and sord_order parameters
 
   prospects = client.prospects.query(:assigned => false, :sort_by => "last_activity_at", :limit => 20)
-  
+
   prospects["total_results"] # number of prospects found
-  
+
   prospects["prospect"].each do |prospect|
     puts prospect["first_name"]
   end
@@ -51,11 +51,21 @@ See each individual object's API reference page for available methods
 http://developer.pardot.com/kb/api-version-3/using-prospects
 
   prospect = client.prospects.create("user@test.com", :first_name => "John", :last_name => "Doe")
-  
+
   prospect.each do |key, value|
     puts "#{key} is #{value}"
   end
-  
+
+=== Subscribing email addresses to lists
+
+Subscriptions to lists are managed through the Prospect object. [To add an email to a list, you can do it in an update on the Prospect object by passing the list_id as a query param](http://developer.pardot.com/kb/api-version-4/prospects/#updating-email-list-subscriptions) as follows:
+
+  #Sample usage
+  email = 'your@email.address'
+  list_id = '20303'
+  params = { "list_#{list_id}": 1 }
+  client.prospects.upsert_by_email(email, params)
+
 === Emails
 
 See each individual call's [API reference page](http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents).
@@ -64,15 +74,15 @@ See each individual call's [API reference page](http://developer.pardot.com/kb/a
   @pardot.emails.read_by_id(email_id)
   @pardot.emails.send_to_list(:email_template_id => template_id, 'list_ids[]' => list_id, :campaign_id => campaign_id)
   @pardot.emails.send_to_prospect(prospect_id, :campaign_id => campaign_id, :email_template_id => template_id)
-  
+
 === Output formats
-  
+
   client.format = "simple" # default
   client.format = "mobile"
   client.format = "full"
 
 === Error handling
-  
+
 Pardot will respond with an error message when you provide invalid parameters
 
   begin
@@ -82,7 +92,7 @@ Pardot will respond with an error message when you provide invalid parameters
   end
 
 Performing API calls across the internet is inherently unsafe, so be sure to catch the exceptions
-  
+
   begin
     visitor = client.visitors.query(:id_greater_than => 200)
   rescue Pardot::NetError => e
@@ -101,10 +111,10 @@ files (the "Software"), to deal in the Software without restriction, including w
 modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
 Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
 Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
 WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
