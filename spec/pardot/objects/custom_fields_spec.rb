@@ -35,7 +35,7 @@ describe Pardot::Objects::CustomFields do
     it "should take in some arguments" do
       fake_get "/api/customField/version/3/do/query?id_greater_than=200&format=simple", sample_results
       
-      @client.custom_fields.query(:id_greater_than => 200).should == {"total_results" => 1, 
+      expect(@client.custom_fields.query(:id_greater_than => 200)).to eq({"total_results" => 1, 
         "customField"=>
           {
             "id"=>"8932",
@@ -49,7 +49,7 @@ describe Pardot::Objects::CustomFields do
             "created_at"=>"2019-11-26 13:40:37",
             "updated_at"=>"2019-11-26 13:40:37"
           }
-        }
+        })
       assert_authorization_header
     end
     

@@ -31,11 +31,11 @@ describe Pardot::Objects::VisitorActivities do
     it "should take in some arguments" do
       fake_get "/api/visitorActivity/version/3/do/query?id_greater_than=200&format=simple", sample_results
       
-      @client.visitor_activities.query(:id_greater_than => 200).should == {"total_results" => 2, 
+      expect(@client.visitor_activities.query(:id_greater_than => 200)).to eq({"total_results" => 2, 
         "visitorActivity"=>[
           {"type_name"=>"Read", "details"=>"Some details"}, 
           {"type_name"=>"Write", "details"=>"More details"}
-        ]}
+        ]})
       assert_authorization_header
     end
     
@@ -56,7 +56,7 @@ describe Pardot::Objects::VisitorActivities do
     it "should return the prospect" do
       fake_post "/api/visitorActivity/version/3/do/read/id/10?format=simple", sample_results
       
-      @client.visitor_activities.read(10).should == {"details"=>"More details", "type_name"=>"Write"}
+      expect(@client.visitor_activities.read(10)).to eq({"details"=>"More details", "type_name"=>"Write"})
       assert_authorization_header
     end
     
