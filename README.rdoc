@@ -12,7 +12,7 @@ The client will authenticate before performing other API calls, but you can manu
 
   require "ruby-pardot"
 
-  client = Pardot::Client.new <email>, <password>, <user_key>
+  client = Pardot::Client.new email, password, user_key
   
   # will raise a Pardot::ResponseError if login fails
   # will raise a Pardot::NetError if the http call fails
