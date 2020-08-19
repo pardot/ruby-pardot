@@ -10,6 +10,8 @@ Add the following to your Gemfile
 
 The client will authenticate before performing other API calls, but you can manually authenticate as well
 
+  require "ruby-pardot"
+
   client = Pardot::Client.new email, password, user_key
   
   # will raise a Pardot::ResponseError if login fails

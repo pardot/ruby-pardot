@@ -21,20 +21,21 @@ describe Pardot::Http do
       fake_get "/api/foo/version/3/bar?format=simple",
                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
       
-      lambda { get }.should raise_error(Pardot::ResponseError)
+
+      expect(lambda { get }).to raise_error(Pardot::ResponseError)
     end
     
     it "should catch and reraise SocketErrors as Pardot::NetError" do
-      Pardot::Client.should_receive(:get).and_raise(SocketError)
+      expect(Pardot::Client).to receive(:get).and_raise(SocketError)
       
-      lambda { get }.should raise_error(Pardot::NetError)
+      expect(lambda { get }).to raise_error(Pardot::NetError)
     end
     
     it "should call handle_expired_api_key when the api key expires" do
       fake_get "/api/foo/version/3/bar?format=simple",
                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
       
-      @client.should_receive(:handle_expired_api_key)
+      expect(@client).to receive(:handle_expired_api_key)
       get
     end
     
@@ -50,20 +51,20 @@ describe Pardot::Http do
       fake_post "/api/foo/version/3/bar?format=simple",
                 %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
       
-      lambda { post }.should raise_error(Pardot::ResponseError)
+      expect(lambda { post }).to raise_error(Pardot::ResponseError)
     end
     
     it "should catch and reraise SocketErrors as Pardot::NetError" do
-      Pardot::Client.should_receive(:post).and_raise(SocketError)
+      expect(Pardot::Client).to receive(:post).and_raise(SocketError)
       
-      lambda { post }.should raise_error(Pardot::NetError)
+      expect(lambda { post }).to raise_error(Pardot::NetError)
     end
     
     it "should call handle_expired_api_key when the api key expires" do
       fake_post "/api/foo/version/3/bar?format=simple",
                 %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
       
-      @client.should_receive(:handle_expired_api_key)
+      expect(@client).to receive(:handle_expired_api_key)
       post
     end
     
@@ -80,20 +81,20 @@ describe Pardot::Http do
       fake_get "/api/foo/version/4/bar?format=simple",
                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
       
-      lambda { get }.should raise_error(Pardot::ResponseError)
+      expect(lambda { get }).to raise_error(Pardot::ResponseError)
     end
     
     it "should catch and reraise SocketErrors as Pardot::NetError" do
-      Pardot::Client.should_receive(:get).and_raise(SocketError)
+      expect(Pardot::Client).to receive(:get).and_raise(SocketError)
       
-      lambda { get }.should raise_error(Pardot::NetError)
+      expect(lambda { get }).to raise_error(Pardot::NetError)
     end
     
     it "should call handle_expired_api_key when the api key expires" do
       fake_get "/api/foo/version/4/bar?format=simple",
                %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
       
-      @client.should_receive(:handle_expired_api_key)
+      expect(@client).to receive(:handle_expired_api_key)
       get
     end
     
@@ -110,20 +111,20 @@ describe Pardot::Http do
       fake_post "/api/foo/version/4/bar?format=simple",
                 %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Login failed</err>\n</rsp>\n)
       
-      lambda { post }.should raise_error(Pardot::ResponseError)
+      expect(lambda { post }).to raise_error(Pardot::ResponseError)
     end
     
     it "should catch and reraise SocketErrors as Pardot::NetError" do
-      Pardot::Client.should_receive(:post).and_raise(SocketError)
+      expect(Pardot::Client).to receive(:post).and_raise(SocketError)
       
-      lambda { post }.should raise_error(Pardot::NetError)
+      expect(lambda { post }).to raise_error(Pardot::NetError)
     end
     
     it "should call handle_expired_api_key when the api key expires" do
       fake_post "/api/foo/version/4/bar?format=simple",
                 %(?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="fail" version="1.0">\n   <err code="15">Invalid API key or user key</err>\n</rsp>\n)
       
-      @client.should_receive(:handle_expired_api_key)
+      expect(@client).to receive(:handle_expired_api_key)
       post
     end
     

@@ -21,10 +21,10 @@ describe Pardot::ResponseError do
       described_class.new(@res)
     end
     specify do
-      subject.to_s.should == @res["__content__"]
+      expect(subject.to_s).to eq(@res["__content__"])
     end
     specify do
-      subject.message.should == @res["__content__"]
+      expect(subject.message).to eq(@res["__content__"])
     end
   end
 
