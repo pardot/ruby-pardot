@@ -6,7 +6,7 @@ PATH
       httparty (= 0.18.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
