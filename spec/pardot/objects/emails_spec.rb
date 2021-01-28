@@ -31,7 +31,7 @@ describe Pardot::Objects::Emails do
   end
 
   it 'should send to a list' do
-    fake_post '/api/email/version/3/do/send?email_template_id=200&list_ids[]=235&campaign_id=654&format=simple', sample_response
+    fake_post '/api/email/version/3/do/send?email_template_id=200&list_ids%5B%5D=235&campaign_id=654&format=simple', sample_response
     expect(@client.emails.send_to_list(:email_template_id => 200, 'list_ids[]' => 235, :campaign_id => 654)).to eq({"name" => "My Email"})
     assert_authorization_header
   end
