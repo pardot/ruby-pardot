@@ -5,6 +5,32 @@ describe Pardot::Authentication do
   def create_client
     @client = Pardot::Client.new "user@test.com", "foo", "bar"
   end
+
+  def create_client_using_salesforce_access_token
+    @client = Pardot::Client.new nil, nil, nil, 3, "access_token_value", '0Uv000000000001CAA'
+  end
+
+  describe "authenticate with Salesforce access_token" do
+    before do
+      @client = create_client_using_salesforce_access_token
+    end
+
+    it "raises error when calling authenticate" do
+      expect{ @client.authenticate }.to raise_error.with_message(/Authentication not available when using Salesforce access token/)
+    end
+
+    it "raises error when calling reauthenticate" do
+      expect{ @client.reauthenticate }.to raise_error.with_message(/Reauthentication not available when using Salesforce access token/)
+    end
+
+    it "returns true for authenticated" do
+      expect(@client.authenticated?).to eq(true)
+    end
+
+    it "returns true for using_salesforce_access_token" do
+      expect(@client.using_salesforce_access_token?).to eq(true)
+    end
+  end
   
   describe "authenticate" do
     
@@ -45,6 +71,13 @@ describe Pardot::Authentication do
       verifyBody
     end
     
+    it "returns false for using_salesforce_access_token" do
+      expect(@client.using_salesforce_access_token?).to eq(false)
+
+      authenticate
+      expect(@client.using_salesforce_access_token?).to eq(false)
+      verifyBody
+    end
   end
 
   describe "authenticateV4" do

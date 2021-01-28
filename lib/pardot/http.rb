@@ -29,6 +29,7 @@ module Pardot
     
     protected
     
+    # @deprecated With Salesforce OAuth, this method will never be invoked. 
     def handle_expired_api_key method, object, path, params, num_retries, e
       raise e unless num_retries == 0
       
@@ -46,7 +47,14 @@ module Pardot
 
     def create_auth_header object
       return if object == "login"
-      { :Authorization => "Pardot api_key=#{@api_key}, user_key=#{@user_key}" }
+      if using_salesforce_access_token? then
+        { 
+          :Authorization => "Bearer #{@salesforce_access_token}",
+          'Pardot-Business-Unit-Id' => @business_unit_id
+        }
+      else
+        { :Authorization => "Pardot api_key=#{@api_key}, user_key=#{@user_key}" }
+      end
     end
     
     def check_response http_response
@@ -56,6 +64,9 @@ module Pardot
       error ||= "Unknown Failure: #{rsp.inspect}" if rsp && rsp["stat"] == "fail"
       content = error['__content__'] if error.is_a?(Hash)
       
+      if [error, content].include?("access_token is invalid") && using_salesforce_access_token?
+        raise AccessTokenExpiredError.new "Access token is invalid. Use Salesforce OAuth to refresh the existing Salesforce access token or to retrieve a new token. See https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm for more information."
+      end  
       if [error, content].include?("Invalid API key or user key") && @api_key
         raise ExpiredApiKeyError.new @api_key
       end
