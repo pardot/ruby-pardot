@@ -8,15 +8,17 @@ Add the following to your Gemfile
 
 === Authentication
 
-The client will authenticate before performing other API calls, but you can manually authenticate as well
+In order to use this client, an access token retrieved from Salesforce OAuth must be specified. See
+the [authetication documentation on developer.pardot.com](https://developer.pardot.com/kb/authentication/) for more information.
 
   require "ruby-pardot"
 
-  client = Pardot::Client.new email, password, user_key
+  version = 3 # or 4
+  access_token = '<access_token>' # Retrieve an access token from Salesforce using OAuth
+  business_unit_id = '<business_unit_id>' # Specify the Business Unit ID of the account to access
+  client = Pardot::Client.new nil, nil, nil, version, access_token, business_unit_id
   
-  # will raise a Pardot::ResponseError if login fails
-  # will raise a Pardot::NetError if the http call fails
-  client.authenticate
+Usage of the username, password, and API key authentication is deprecated and will be removed in an upcoming release.
   
 === Object Types
 
