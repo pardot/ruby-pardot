@@ -17,9 +17,9 @@ the [authetication documentation on developer.pardot.com](https://developer.pard
   access_token = '<access_token>' # Retrieve an access token from Salesforce using OAuth
   business_unit_id = '<business_unit_id>' # Specify the Business Unit ID of the account to access
   client = Pardot::Client.new nil, nil, nil, version, access_token, business_unit_id
-  
+
 Usage of the username, password, and API key authentication is deprecated and will be removed in an upcoming release.
-  
+
 === Object Types
 
 The available objects are:
@@ -35,15 +35,15 @@ The available objects are:
 * visits
 
 === Querying Objects
-  
+
 http://developer.pardot.com/kb/api-version-3/querying-prospects
-  
+
 Most objects accept limit, offset, sort_by, and sord_order parameters
 
   prospects = client.prospects.query(:assigned => false, :sort_by => "last_activity_at", :limit => 20)
-  
+
   prospects["total_results"] # number of prospects found
-  
+
   prospects["prospect"].each do |prospect|
     puts prospect["first_name"]
   end
@@ -55,11 +55,11 @@ See each individual object's API reference page for available methods
 http://developer.pardot.com/kb/api-version-3/using-prospects
 
   prospect = client.prospects.create("user@test.com", :first_name => "John", :last_name => "Doe")
-  
+
   prospect.each do |key, value|
     puts "#{key} is #{value}"
   end
-  
+
 === Emails
 
 See each individual call's [API reference page](http://developer.pardot.com/kb/api-version-3/introduction-table-of-contents).
@@ -68,15 +68,15 @@ See each individual call's [API reference page](http://developer.pardot.com/kb/a
   @pardot.emails.read_by_id(email_id)
   @pardot.emails.send_to_list(:email_template_id => template_id, 'list_ids[]' => list_id, :campaign_id => campaign_id)
   @pardot.emails.send_to_prospect(prospect_id, :campaign_id => campaign_id, :email_template_id => template_id)
-  
+
 === Output formats
-  
+
   client.format = "simple" # default
   client.format = "mobile"
   client.format = "full"
 
 === Error handling
-  
+
 Pardot will respond with an error message when you provide invalid parameters
 
   begin
@@ -86,7 +86,7 @@ Pardot will respond with an error message when you provide invalid parameters
   end
 
 Performing API calls across the internet is inherently unsafe, so be sure to catch the exceptions
-  
+
   begin
     visitor = client.visitors.query(:id_greater_than => 200)
   rescue Pardot::NetError => e
