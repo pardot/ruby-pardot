@@ -39,7 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 1.10)
-  fakeweb
+  fakeweb (= 1.3.0)
   rspec (= 3.5.0)
   ruby-pardot!
 
