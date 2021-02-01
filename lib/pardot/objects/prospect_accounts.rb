@@ -6,7 +6,6 @@ module Pardot
       end
 
       class ProspectAccounts
-
         def initialize(client)
           @client = client
         end
@@ -18,18 +17,18 @@ module Pardot
           result
         end
 
-        def describe(params={})
+        def describe(params = {})
           post('/do/describe', params)
         end
 
-        def create(params={})
+        def create(params = {})
           post('/do/create', params)
         end
 
         # read_by_id
         # update_by_id
-        [:read, :update].each do |verb|
-          define_method(verb) do |id, params={}|
+        %i[read update].each do |verb|
+          define_method(verb) do |id, params = {}|
             post(api_url(verb, 'id', id), params)
           end
         end
@@ -40,12 +39,12 @@ module Pardot
           "/do/#{verb}/#{direct_to}/#{value}"
         end
 
-        def get(path, params={}, result='prospectAccount')
+        def get(path, params = {}, result = 'prospectAccount')
           response = @client.get('prospectAccount', path, params)
           result ? response[result] : response
         end
 
-        def post(path, params={}, result='prospectAccount')
+        def post(path, params = {}, result = 'prospectAccount')
           response = @client.post('prospectAccount', path, params)
           result ? response[result] : response
         end

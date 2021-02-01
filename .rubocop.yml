@@ -1,0 +1,9 @@
+AllCops:
+  NewCops: enable
+
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false

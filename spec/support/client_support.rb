@@ -1,10 +1,10 @@
+# frozen_string_literal: true
 
 def create_auth_managers
   [UsernamePasswordAuthManager.new, SalesforceAccessTokenAuthManager.new]
 end
 
 class UsernamePasswordAuthManager
-
   attr_accessor :test_name_suffix, :expected_authorization_header
 
   def initialize
@@ -13,19 +13,17 @@ class UsernamePasswordAuthManager
   end
 
   def create_client
-    client = Pardot::Client.new "user@test.com", "foo", "bar"
-    client.api_key = "my_api_key"
+    client = Pardot::Client.new 'user@test.com', 'foo', 'bar'
+    client.api_key = 'my_api_key'
     client
   end
 
   def has_business_unit_id_header?
     false
   end
-
 end
 
 class SalesforceAccessTokenAuthManager
-
   attr_accessor :test_name_suffix, :expected_authorization_header, :expected_business_unit_id_header
 
   def initialize
@@ -41,5 +39,4 @@ class SalesforceAccessTokenAuthManager
   def has_business_unit_id_header?
     false
   end
-
 end

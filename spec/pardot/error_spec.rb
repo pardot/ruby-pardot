@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe Pardot::ResponseError do
   before do
     @res = {
-      "code" => "9",
-      "__content__" => "A prospect with the specified email address already exists"
+      'code' => '9',
+      '__content__' => 'A prospect with the specified email address already exists'
     }
   end
 
@@ -21,10 +23,10 @@ describe Pardot::ResponseError do
       described_class.new(@res)
     end
     specify do
-      expect(subject.to_s).to eq(@res["__content__"])
+      expect(subject.to_s).to eq(@res['__content__'])
     end
     specify do
-      expect(subject.message).to eq(@res["__content__"])
+      expect(subject.message).to eq(@res['__content__'])
     end
   end
 
