@@ -1,7 +1,10 @@
 module Pardot
   class Error < StandardError; end
+
   class NetError < Error; end
+
   class ExpiredApiKeyError < Error; end
+
   class AccessTokenExpiredError < Error; end
 
   class ResponseError < Error
@@ -10,11 +13,11 @@ module Pardot
     end
 
     def to_s
-      @res["__content__"]
+      @res['__content__']
     end
 
     def code
-      @res["code"].to_i
+      @res['code'].to_i
     end
 
     def inspect
