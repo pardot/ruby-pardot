@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Library for interacting with the Pardot API"
   s.description = "Library for interacting with the Pardot API"
 
+  s.required_ruby_version = '>= 2.6'
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "ruby-pardot"
 
@@ -19,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "rspec", "3.5.0"
-  s.add_development_dependency "fakeweb"
+  s.add_development_dependency "fakeweb", "1.3.0"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
