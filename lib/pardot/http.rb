@@ -60,7 +60,7 @@ module Pardot
       error ||= "Unknown Failure: #{rsp.inspect}" if rsp && rsp['stat'] == 'fail'
       content = error['__content__'] if error.is_a?(Hash)
 
-      if [error, content].include?('access_token is invalid') && using_salesforce_access_token?
+      if [error, content].grep(/access_token is invalid/).any? && using_salesforce_access_token?
         raise AccessTokenExpiredError,
               'Access token is invalid. Use Salesforce OAuth to refresh the existing Salesforce access token or to retrieve a new token. See https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/oauth_refresh_token_flow.htm for more information.'
       end
