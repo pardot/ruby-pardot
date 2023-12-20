@@ -60,4 +60,26 @@ describe Pardot::Client do
       expect(@client.version).to eq(4)
     end
   end
+
+  describe '#base_uri' do
+    context 'without PARDOT_URL' do
+      before do
+        ENV.delete('PARDOT_URL')
+      end
+
+      it 'return default value' do
+        expect(Pardot::Client.base_uri).to eq('https://pi.pardot.com')
+      end
+    end
+
+    context 'with PARDOT_URL' do
+      before do
+        ENV['PARDOT_URL'] = 'https://pi.demo.pardot.com'
+      end
+
+      it 'return ENV value' do
+        expect(Pardot::Client.base_uri).to eq('https://pi.pardot.com')
+      end
+    end
+  end
 end

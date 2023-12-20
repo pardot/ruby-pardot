@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-pardot (1.4.2)
+    ruby-pardot (1.4.3)
       crack (= 0.4.5)
       httparty (= 0.21.0)
 
@@ -15,9 +15,9 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    mini_mime (1.1.2)
+    mini_mime (1.1.5)
     multi_xml (0.6.0)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
