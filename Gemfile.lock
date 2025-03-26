@@ -17,7 +17,8 @@ GEM
       multi_xml (>= 0.5.2)
     mini_mime (1.1.2)
     multi_xml (0.6.0)
-    rexml (3.2.5)
+    rexml (3.2.8)
+      strscan (>= 3.0.9)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -31,6 +32,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    strscan (3.1.0)
 
 PLATFORMS
   ruby
