@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Library for interacting with the Pardot API'
   s.description = 'Library for interacting with the Pardot API'
 
-  s.required_ruby_version = '>= 2.6'
+  s.required_ruby_version = '>= 2.7'
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "ruby-pardot"
 
