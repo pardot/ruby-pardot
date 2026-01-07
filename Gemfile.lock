@@ -35,7 +35,7 @@ GEM
     rspec-support (3.5.0)
 
 PLATFORMS
-  arm64-darwin-25
+  ruby
 
 DEPENDENCIES
   bundler (>= 1.10)
