@@ -12,12 +12,12 @@ Gem::Specification.new do |s|
   s.summary     = 'Library for interacting with the Pardot API'
   s.description = 'Library for interacting with the Pardot API'
 
-  s.required_ruby_version = '>= 2.6'
+  s.required_ruby_version = '>= 2.7'
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "ruby-pardot"
 
   s.add_dependency 'crack', '0.4.5'
-  s.add_dependency 'httparty', '0.21.0'
+  s.add_dependency 'httparty', '~> 0.24.0'
 
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "rspec", "3.5.0"

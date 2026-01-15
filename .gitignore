@@ -3,3 +3,4 @@ pkg/*
 .bundle
 .vscode
 bin
+.idea
