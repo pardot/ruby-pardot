@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "rspec", "3.5.0"
   s.add_development_dependency "fakeweb", "1.3.0"
+  s.add_development_dependency "rake", "~> 13.0"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map { |f| f =~ %r{^bin/(.*)} ? Regexp.last_match(1) : nil }.compact
