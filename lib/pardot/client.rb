@@ -1,7 +1,7 @@
 module Pardot
   class Client
     include HTTParty
-    base_uri 'https://pi.pardot.com'
+    base_uri ENV.fetch('PARDOT_URL', 'https://pi.pardot.com')
     format :xml
 
     include Authentication

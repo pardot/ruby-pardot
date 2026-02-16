@@ -7,6 +7,28 @@ describe Pardot::Client do
     @client = Pardot::Client.new 'user@test.com', 'foo', 'bar'
   end
 
+  describe '#base_uri' do
+    context 'without PARDOT_URL' do
+      before do
+        ENV.delete('PARDOT_URL')
+      end
+
+      it 'return default value' do
+        expect(Pardot::Client.base_uri).to eq('https://pi.pardot.com')
+      end
+    end
+
+    context 'with PARDOT_URL' do
+      before do
+        ENV['PARDOT_URL'] = 'https://pi.demo.pardot.com'
+      end
+
+      it 'return ENV value' do
+        expect(Pardot::Client.base_uri).to eq('https://pi.pardot.com')
+      end
+    end
+  end
+
   describe 'client with Salesforce access_token' do
     it 'should set properties' do
       @client = Pardot::Client.new nil, nil, nil, 3, 'access_token_value', '0Uv000000000001CAA'
